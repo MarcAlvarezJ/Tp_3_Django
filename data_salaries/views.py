@@ -1,9 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
-
 from django.shortcuts import render
-from data_salaries.forms import upload_file
-
+from data_salaries.forms import upload_file, view_filter
 import pandas as pd
+from IPython.display import HTML
 
 # Create your views here.
 
@@ -27,4 +26,32 @@ def success(request):
 
 def view_csv(request):
     data = pd.read_csv('salaries.csv')
-    return render(request, 'view_csv.html', {'data': data})
+    atr_list = [
+        'experience_level',
+        'employment_type',
+        'employee_residence',
+        'remote_ratio',
+        'company_location',
+        'company_size'
+        ]
+    if request.method == 'POST':
+        filtered_data = data
+        form = view_filter(request.POST)
+        if form.is_valid():
+            for atr in atr_list:
+                if form.cleaned_data[atr] != []:
+                    filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
+            html_filtered_data = HTML(filtered_data.to_html()(classes='table table-stripped table-sm'))
+            context = {
+                'form': form,
+                'data': html_filtered_data
+            }
+            render(request, 'view_csv.html', context)
+    else:
+        form = view_filter
+        html_data = data.to_html()
+        context = {
+                'form': form,
+                'data': html_data
+            }
+    return render(request, 'view_csv.html', context)
