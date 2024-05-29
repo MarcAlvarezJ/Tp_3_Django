@@ -1,9 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
-
 from django.shortcuts import render
 from data_salaries.forms import upload_file, view_filter
-
 import pandas as pd
+from IPython.display import HTML
 
 # Create your views here.
 
@@ -42,16 +41,17 @@ def view_csv(request):
             for atr in atr_list:
                 if form.cleaned_data[atr] != []:
                     filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
+            html_filtered_data = HTML(filtered_data.to_html()(classes='table table-stripped table-sm'))
             context = {
                 'form': form,
-                'data': filtered_data
+                'data': html_filtered_data
             }
             render(request, 'view_csv.html', context)
     else:
         form = view_filter
+        html_data = data.to_html()
         context = {
                 'form': form,
-                'data': data
+                'data': html_data
             }
     return render(request, 'view_csv.html', context)
-
