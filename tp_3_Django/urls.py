@@ -17,8 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.urls import include
+import data_salaries
+import data_salaries.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', data_salaries.views.redirect_start),
     path('data_salaries/', include('data_salaries.urls'))
 ]
