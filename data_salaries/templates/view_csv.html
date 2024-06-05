@@ -207,7 +207,7 @@
 </svg>
 
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Company name</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Tp Django</a>
 
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
@@ -229,10 +229,10 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary" style="height: 100vh;">
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
-          <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+          <h5 class="offcanvas-title" id="sidebarMenuLabel">Tp Django</h5>
           <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
@@ -246,7 +246,7 @@
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/view/">
                 <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-                Analisis del dataset
+                Dataset
               </a>
             </li>
             <li class="nav-item">
@@ -255,6 +255,12 @@
                 Graficos relevantes
               </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link d-flex align-items-center gap-2 " href="http://127.0.0.1:8000/data_salaries/Analisis/">
+                  <svg class="bi"><use xlink:href="#cart"/></svg>
+                  Analisis cel dataset 
+                </a>
+              </li>
 
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-body-secondary text-uppercase">
@@ -266,7 +272,7 @@
 
 
           <hr class="my-3">
-
+          <div style="position: fixed; bottom: 0; left: 0; padding-bottom: 15px;"> 
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
@@ -282,12 +288,13 @@
             </li>
           </ul>
         </div>
+        </div>
       </div>
     </div>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Ingrese los datos</h1>
+        <h1 class="h2" style="margin-top: 7px">Data set</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -295,9 +302,111 @@
           </div>
         </div>
       </div>
-      
-      <h2>Data set</h2>
-      {{ data | safe }}
+
+      <head>
+        <title>Search Bar Example</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>
+        <b>Search the entire table:
+            <input id="entireSearch" type="text" placeholder="Search here">
+        </b>
+    
+        <br>
+    
+        <b>Search specific column (Work Year, Experience Level, etc.):
+            <select id="columnSelect">
+                <option value="all">All Columns</option>
+                <option value="work_year">Work Year</option>
+                <option value="experience_level">Experience Level</option>
+                <option value="employment_type">Employment Type</option>
+                <option value="job_title">Job Title</option>
+                <option value="salary">Salary</option>
+                <option value="salary_currency">Salary Currency</option>
+                <option value="employee_residence">Employee Residence</option>
+                <option value="remote_ratio">Remote Ratio</option>
+                <option value="company_location">Company Location</option>
+                <option value="company_size">Company Size</option>
+            </select>
+            <input id="columnSearch" type="text" placeholder="Search column">
+        </b>
+    
+        <br><br>
+    
+        <table id="geeks" border="1">
+            <thead>
+                <tr>
+                    <th>Work Year</th>
+                    <th>Experience Level</th>
+                    <th>Employment Type</th>
+                    <th>Job Title</th>
+                    <th>Salary</th>
+                    <th>Salary Currency</th>
+                    <th>Employee Residence</th>
+                    <th>Remote Ratio</th>
+                    <th>Company Location</th>
+                    <th>Company Size</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for row in data %}
+                <tr>
+                    <td>{{ row.work_year }}</td>
+                    <td>{{ row.experience_level }}</td>
+                    <td>{{ row.employment_type }}</td>
+                    <td>{{ row.job_title }}</td>
+                    <td>{{ row.salary }}</td>
+                    <td>{{ row.salary_currency }}</td>
+                    <td>{{ row.employee_residence }}</td>
+                    <td>{{ row.remote_ratio }}</td>
+                    <td>{{ row.company_location }}</td>
+                    <td>{{ row.company_size }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <script>
+            $(document).ready(function () {
+                $("#entireSearch, #columnSearch").on("keyup", function () {
+                    let entireValue = $("#entireSearch").val().toLowerCase();
+                    let columnValue = $("#columnSearch").val().toLowerCase();
+                    let selectedColumn = $("#columnSelect").val();
+    
+                    $("#geeks tbody tr").each(function () {
+                        let rowText = $(this).text().toLowerCase();
+                        // Show all rows if entire search is empty
+                        let matchEntire = entireValue === ""; 
+    
+                        if (entireValue !== "") {
+                            matchEntire = rowText.indexOf(entireValue) > -1;
+                        }
+                        // Assuming all rows initially match column search
+                        let matchColumn = true; 
+                        if (selectedColumn !== "all" && columnValue !== "") {
+                            let columnData = $(this).find("td:nth-child(" + 
+                            (selectedColumn === "work_year" ? 1 : 
+                             (selectedColumn === "experience_level" ? 2 : 
+                             (selectedColumn === "employment_type" ? 3 : 
+                             (selectedColumn === "job_title" ? 4 :
+                             (selectedColumn === "salary" ? 5 : 
+                             (selectedColumn === "salary_currency" ? 6 :
+                             (selectedColumn === "employee_residence" ? 7 :
+                             (selectedColumn === "remote_ratio" ? 8 :
+                             (selectedColumn === "company_location" ? 9 :
+                             (selectedColumn === "company_size" ? 10 : 0)))))))))) +
+                             ")").text().toLowerCase();
+                            matchColumn = columnData.indexOf(columnValue) > -1;
+                        }
+    
+                        $(this).toggle(matchEntire && matchColumn);
+                    });
+                });
+            });
+        </script>
+    </body>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 

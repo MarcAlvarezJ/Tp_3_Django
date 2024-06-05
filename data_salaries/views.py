@@ -38,21 +38,24 @@ def view_csv(request):
             for atr in atr_list:
                 if form.cleaned_data[atr] != []:
                     filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
-            html_filtered_data = HTML(filtered_data.to_html()(classes='table table-stripped table-sm'))
             context = {
                 'form': form,
-                'data': html_filtered_data
+                'data': filtered_data
             }
             render(request, 'view_csv.html', context)
     else:
         form = view_filter
-        html_data = data.to_html()
+        data = data.head(5000).to_dict(orient='records')
         context = {
                 'form': form,
-                'data': html_data
+                'data': data
             }
     return render(request, 'view_csv.html', context)
 
 def graficos(request):
         return render(request, 'graficos.html')
 
+def Analisis(request):
+
+    
+    return render(request, 'analisis_dataset.html')

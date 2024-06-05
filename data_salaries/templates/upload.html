@@ -207,7 +207,7 @@
 </svg>
 
 <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Company name</a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">Tp Django</a>
 
   <ul class="navbar-nav flex-row d-md-none">
     <li class="nav-item text-nowrap">
@@ -237,22 +237,28 @@
         </div>
         <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
           <ul class="nav flex-column">
-            <li class="nav-item">
+            <li class="nav-item" >
               <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#">
                 <svg class="bi"><use xlink:href="#house-fill"/></svg>
                 Home
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/view/">
                 <svg class="bi"><use xlink:href="#file-earmark"/></svg>
-                Analisis del dataset
+               Dataset
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link d-flex align-items-center gap-2" href="#">
+              <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/graficos/">
                 <svg class="bi"><use xlink:href="#cart"/></svg>
                 Graficos relevantes
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/Analisis/">
+                <svg class="bi"><use xlink:href="#cart"/></svg>
+                Analisis del dataset 
               </a>
             </li>
 
@@ -265,6 +271,7 @@
 
           <hr class="my-3">
 
+          <div style="position: fixed; bottom: 0; left: 0; padding-bottom: 15px;">
           <ul class="nav flex-column mb-auto">
             <li class="nav-item">
               <a class="nav-link d-flex align-items-center gap-2" href="#">
@@ -280,12 +287,13 @@
             </li>
           </ul>
         </div>
+        </div>
       </div>
     </div>
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Ingrese los datos</h1>
+        <h1 class="h2" style="margin-top: 7px">Ingrese los datos</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -301,7 +309,7 @@
         <input type="submit" value="Submit">
     </form>
 {% endif %}
-      <h2>El dataset sera mostrado debajo de este mensaje</h2>
+      <h2 style="margin-top: 15px">El dataset sera mostrado debajo de este mensaje</h2>
       
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
