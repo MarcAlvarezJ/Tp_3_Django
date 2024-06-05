@@ -11,7 +11,7 @@ def upload(request):
         form = upload_file(request.POST, request.FILES)
         if form.is_valid():
             handle_file(request.FILES['upload_file'])
-            return HttpResponseRedirect('/data_salaries/success/')
+            return HttpResponseRedirect('/data_salaries/view/')
     else:
         form = upload_file
     return render(request, 'upload.html', {'form': form})
@@ -20,9 +20,6 @@ def handle_file(file):
     with open("salaries.csv", "wb+") as destination:
         for chunk in file.chunks():
             destination.write(chunk)
-
-def success(request):
-    return HttpResponse('Archivo cargado exitosamente')
 
 def view_csv(request):
     data = pd.read_csv('salaries.csv')
@@ -55,3 +52,7 @@ def view_csv(request):
                 'data': html_data
             }
     return render(request, 'view_csv.html', context)
+
+def graficos(request):
+        return render(request, 'graficos.html')
+

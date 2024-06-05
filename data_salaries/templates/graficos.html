@@ -13,7 +13,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
 
     {% load static %}
-
+    
 
     
     <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
@@ -263,6 +263,8 @@
               <svg class="bi"><use xlink:href="#plus-circle"/></svg>
             </a>
           </h6>
+          <ul class="nav flex-column mb-auto">
+            <li class="nav-item">
 
 
           <hr class="my-3">
@@ -296,8 +298,7 @@
         </div>
       </div>
       
-      <h2>Data set</h2>
-      {{ data | safe }}
+      <h2>Graficos</h2>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
