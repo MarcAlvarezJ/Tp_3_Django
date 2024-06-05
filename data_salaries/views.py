@@ -3,6 +3,9 @@ from django.shortcuts import render
 from data_salaries.forms import upload_file, view_filter, analize_filter
 import pandas as pd
 from IPython.display import HTML
+import io
+import urllib, base64
+import matplotlib.pyplot as plt
 
 # Create your views here.
 
@@ -58,9 +61,6 @@ def view_csv(request):
                 'data': html_data
             }
     return render(request, 'view_csv.html', context)
-
-def graficos(request):
-        return render(request, 'graficos.html')
 
 def analize_data(request):
     try:
@@ -131,3 +131,85 @@ def analize_data(request):
                 'data': html_analized_data.data
             }
     return render(request, 'view_csv.html', context)
+
+def graphs(request):
+    try:
+        data = pd.read_csv('salaries.csv')
+    except FileNotFoundError:
+        return HttpResponse('Datos no cargados')
+    
+    plt.figure(figsize=(10, 6))
+    plt.hist(data['salary_in_usd'], bins=30, color='skyblue', edgecolor='black')
+    plt.title('Distribución de Salarios')
+    plt.xlabel('Salario en USD')
+    plt.ylabel('Frecuencia')
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri_1 = urllib.parse.quote(string)
+
+
+    plt.figure(figsize=(10, 6))
+    plt.scatter(data['experience_level'], data['salary_in_usd'], color='skyblue')
+    plt.title('Salario vs. Experiencia')
+    plt.xlabel('Nivel de Experiencia')
+    plt.ylabel('Salario en USD')
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri_2 = urllib.parse.quote(string)
+    
+    plt.figure(figsize=(10, 6))
+    data.groupby('employment_type')['salary_in_usd'].mean().plot(kind='bar', color='skyblue', edgecolor='black')
+    plt.title('Salarios por Tipo de Empleo')
+    plt.xlabel('Tipo de Empleo')
+    plt.ylabel('Salario Promedio en USD')
+    plt.xticks(rotation=0)
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri_3 = urllib.parse.quote(string)
+
+    plt.figure(figsize=(10, 6))
+    bp = data.boxplot(column='salary_in_usd', by='company_size', patch_artist=True,
+                  boxprops=dict(facecolor='skyblue', color='black'), 
+                  capprops=dict(color='black'),
+                  whiskerprops=dict(color='black'),
+                  flierprops=dict(color='black', markeredgecolor='black'),
+                  medianprops=dict(color='black'))
+    plt.suptitle('')
+    plt.title('Salarios por Tamaño de la Empresa')
+    plt.xlabel('Tamaño de la Empresa')
+    plt.ylabel('Salario en USD')
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri_4 = urllib.parse.quote(string)
+
+    plt.figure(figsize=(10, 6))
+    data.groupby('remote_ratio')['salary_in_usd'].mean().plot(kind='bar', color='skyblue', edgecolor='black')
+    plt.title('Ratio de Trabajo Remoto vs. Salario')
+    plt.xlabel('Ratio de Trabajo Remoto')
+    plt.ylabel('Salario en USD')
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    string = base64.b64encode(buf.read())
+    uri_5 = urllib.parse.quote(string)
+
+    context = {
+        'sal_hist': uri_1,
+        'el_scat': uri_2,
+        'et_bars': uri_3,
+        'cs_box': uri_4,
+        'rr_bars': uri_5,
+    }
+
+    return render(request, 'graficos.html', context)
+
+def redirect_start(request):
+    return HttpResponseRedirect('/data_salaries/upload/')
