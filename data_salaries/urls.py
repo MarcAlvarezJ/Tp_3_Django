@@ -3,7 +3,8 @@ from data_salaries import views
 
 urlpatterns = [
     path('upload/', views.upload, name='upload'),
+    path('success/', views.success, name='success'),
     path('view/', views.view_csv, name='view'),
-    path('graficos/', views.graficos, name='graficos'),
-    path('Analisis/', views.Analisis, name='Analisis'),
+    path('analisis/', views.analize_data, name='analisis'),
+    path('graphs/', views.graphs, name='graphs')
 ]
