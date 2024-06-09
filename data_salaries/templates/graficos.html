@@ -152,8 +152,8 @@
 </header>
 
 <div class="container-fluid">
-  <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary" style="height: 100vh;">
+  <div class="row" style="height: 100vh;">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary d-md-block d-lg-block d-none" >
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="sidebarMenuLabel">Tp Django</h5>
@@ -229,7 +229,27 @@
         </div>
       </div>
       
-      <h2>Graficos</h2>
+
+<h2>Gráficos</h2>
+
+<div class="container-fluid mt-2" style=": display: flex; margin: 20px auto; width: 80%;">
+    <div class="row justify-content-center">
+        
+<img class="m-1" src="data:image/png;base64,{{ sal_hist }}" alt="Distribución de Salarios">
+
+
+<img class="m-1" src="data:image/png;base64,{{ el_scat }}" alt="Salario vs. Experiencia">
+
+
+<img class="m-1" src="data:image/png;base64,{{ et_bars }}" alt="Salarios por Tipo de Empleo">
+
+<img class="m-1" src="data:image/png;base64,{{ cs_box }}" alt="Salarios por Tamaño de la Empresa">
+
+<img class="m-1" src="data:image/png;base64,{{ rr_bars }}" alt="Ratio de Trabajo Remoto vs. Salario">
+
+</div>
+</div>
+</body>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 

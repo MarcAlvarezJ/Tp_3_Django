@@ -152,8 +152,8 @@
 </header>
 
 <div class="container-fluid" >
-  <div class="row">
-    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary" style="height: 100vh;">
+  <div class="row" style="height: 100vh;">
+    <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary d-md-block d-lg-block d-none" >
       <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="sidebarMenuLabel">Tp Django</h5>
@@ -225,6 +225,7 @@
           </div>
         </div>
       </div>
+    
       
     {% if form %}
     <form enctype="multipart/form-data" method="post">
@@ -234,7 +235,8 @@
     </form>
 {% endif %}
       <h2 style="margin-top: 15px">El dataset sera mostrado debajo de este mensaje</h2>
-      
+
+    </body>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 
