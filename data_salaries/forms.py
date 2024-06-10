@@ -75,11 +75,11 @@ class view_filter(forms.Form):
         choices=company_size_opt,
         )
     
-vars_opt = {
-    'experience_level': 'experience_level', 'employment_type': 'employment_type',
-    'employee_residence': 'employee_residence', 'remote_ratio': 'remote_ratio',
-    'company_location': 'company_location', 'company_size': 'company_size'
-} 
+vars_opt = [
+    ('experience_level', 'experience_level'), ('employment_type', 'employment_type'),
+    ('employee_residence', 'employee_residence'), ('remote_ratio', 'remote_ratio'),
+    ('company_location', 'company_location'), ('company_size', 'company_size')
+]
 
 class analize_filter(forms.Form):
     filter_vars = forms.MultipleChoiceField(

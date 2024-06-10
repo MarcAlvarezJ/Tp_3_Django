@@ -14,7 +14,7 @@ def upload(request):
         form = upload_file(request.POST, request.FILES)
         if form.is_valid():
             handle_file(request.FILES['upload_file'])
-            return HttpResponseRedirect('/data_salaries/success/')
+            return HttpResponseRedirect('/data_salaries/view/')
     else:
         form = upload_file
     return render(request, 'upload.html', {'form': form})
@@ -24,8 +24,6 @@ def handle_file(file):
         for chunk in file.chunks():
             destination.write(chunk)
 
-def success(request):
-    return HttpResponse('Archivo cargado exitosamente')
 
 def view_csv(request):
     try:
@@ -47,18 +45,17 @@ def view_csv(request):
             for atr in atr_list:
                 if form.cleaned_data[atr] != []:
                     filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
-            html_filtered_data = HTML(filtered_data.to_html(classes='table table-stripped table-sm'))
             context = {
                 'form': form,
-                'data': html_filtered_data
+                'data': filtered_data
             }
             render(request, 'view_csv.html', context)
     else:
         form = view_filter
-        html_data = data.to_html()
+        data = data.head(5000).to_dict(orient='records')
         context = {
                 'form': form,
-                'data': html_data
+                'data': data
             }
     return render(request, 'view_csv.html', context)
 
@@ -113,7 +110,7 @@ def analize_data(request):
                 'form': form,
                 'data': html_analized_data.data
             }
-            render(request, 'csv_analisis.html', context)
+            render(request, 'analisis_dataset.html', context)
     else:
         form = analize_filter
         filtered_data = data
@@ -130,7 +127,7 @@ def analize_data(request):
                 'form': form,
                 'data': html_analized_data.data
             }
-    return render(request, 'view_csv.html', context)
+    return render(request, 'analisis_dataset.html', context)
 
 def graphs(request):
     try:
