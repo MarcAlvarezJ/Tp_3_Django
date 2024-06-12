@@ -52,7 +52,7 @@ def view_csv(request):
             render(request, 'view_csv.html', context)
     else:
         form = view_filter
-        data = data.head(5000).to_dict(orient='records')
+        data = data.head(3000).to_dict(orient='records')
         context = {
                 'form': form,
                 'data': data
