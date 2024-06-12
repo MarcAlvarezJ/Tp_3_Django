@@ -99,7 +99,7 @@ def analize_data(request):
 
             columns = []
             analisis_vars = ['mean', 'median', 'max', 'min', 'Q1', 'Q3', 'Count']
-            for var in filter_list:
+            for var in reversed(filter_list):
                 columns.append(var)
             for var in analisis_vars:
                 columns.append(var)
