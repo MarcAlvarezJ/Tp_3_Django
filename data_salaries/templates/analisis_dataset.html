@@ -288,7 +288,9 @@
         <input type="submit" value="Submit">
     </form>
     {% endif %} {% endcomment %}
-    {{data|safe}}
+    <div style='overflow-x: scroll'>
+      {{data|safe}}
+    </div>
 </div>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
