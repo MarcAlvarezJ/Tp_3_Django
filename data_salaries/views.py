@@ -45,6 +45,7 @@ def view_csv(request):
             for atr in atr_list:
                 if form.cleaned_data[atr] != []:
                     filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
+                    filtered_data = filtered_data.head(3000).to_dict(orient='records')
             context = {
                 'form': form,
                 'data': filtered_data
@@ -97,9 +98,16 @@ def analize_data(request):
             analized_matrix = []
             grouping_recursive(data_levels_list, row_vars_list, counter, recursive_count)
 
+            name_change_dict = {
+                'experience_level': 'Nivel de Expreiencia', 'employment_type': 'Tipo de Trabajo',
+                'employee_residence': 'Residencia Empledo', 'remote_ratio': 'Pct. Remoto',
+                'company_location': 'Ubicacion Empresa', 'company_size': 'Tamaño Empresa'
+            }
+
+            column_names = [name_change_dict[elem] for elem in filter_list]
             columns = []
-            analisis_vars = ['mean', 'median', 'max', 'min', 'Q1', 'Q3', 'Count']
-            for var in reversed(filter_list):
+            analisis_vars = ['Promedio', 'Mediana', 'Maximo', 'Minimo', 'Q1', 'Q3', 'Cantidad']
+            for var in reversed(column_names):
                 columns.append(var)
             for var in analisis_vars:
                 columns.append(var)
@@ -120,8 +128,9 @@ def analize_data(request):
         n_min = filtered_data['salary_in_usd'].min()
         n_Q1 = filtered_data['salary_in_usd'].quantile(0.25)
         n_Q3 = filtered_data['salary_in_usd'].quantile(0.75)
-        analized_matrix = [n_mean, n_med, n_max, n_min, n_Q1, n_Q3]
-        analized_df = pd.DataFrame([analized_matrix], columns=('Mean', 'Median', 'Max', 'Min', 'Q1', 'Q3'))
+        n_count = len(filtered_data)
+        analized_matrix = [n_mean, n_med, n_max, n_min, n_Q1, n_Q3, n_count]
+        analized_df = pd.DataFrame([analized_matrix], columns=('Promedio', 'Mediana', 'Maximo', 'Minimo', 'Q1', 'Q3', 'Cantidad'))
         html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
         context = {
                 'form': form,
