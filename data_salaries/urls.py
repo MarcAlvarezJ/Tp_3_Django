@@ -5,5 +5,7 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('view/', views.view_csv, name='view'),
     path('analisis/', views.analize_data, name='analisis'),
-    path('graphs/', views.graphs, name='graphs')
+    path('graphs/', views.graphs, name='graphs'),
+    path('prediction/', views.prediction_select, name='prediction'),
+    path('prediction/business/', views.prediction_business, name='business_predict')
 ]

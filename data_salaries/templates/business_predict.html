@@ -1,0 +1,26 @@
+<form method="post">
+    {% csrf_token %}
+    {{ amount_form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+{% if error %}
+{{ error }}
+{% endif %}
+{% if business_form %}
+<form method="post">
+    {% csrf_token %}
+    <h1>Business info</h1>
+    {{ business_form.as_p }}
+    {% for form in employee_form %}
+    <h1>employee {{forloop.counter}}</h1>
+    {{form.as_p}}
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
+{% endif %}
+
+{% if uri %}
+median: {{ median }}
+rango: {{range}}
+<img src="data:image/png;base64,{{ uri }}">
+{% endif %}
