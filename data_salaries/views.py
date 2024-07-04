@@ -12,11 +12,17 @@ import matplotlib.pyplot as plt
 def upload(request):
     if request.method == 'POST':
         form = upload_file(request.POST, request.FILES)
+        context ={
+            'active': 5,
+        }
         if form.is_valid():
             handle_file(request.FILES['upload_file'])
             return HttpResponseRedirect('/data_salaries/view/')
     else:
         form = upload_file
+        context = {
+            'active': 5,
+        }
     return render(request, 'upload.html', {'form': form})
 
 def handle_file(file):
@@ -47,7 +53,8 @@ def view_csv(request):
                     filtered_data = filtered_data[filtered_data[atr].isin(form.cleaned_data[atr])]
             context = {
                 'form': form,
-                'data': filtered_data
+                'data': filtered_data,
+                'active': 4,
             }
             render(request, 'view_csv.html', context)
     else:
@@ -55,7 +62,8 @@ def view_csv(request):
         data = data.head(3000).to_dict(orient='records')
         context = {
                 'form': form,
-                'data': data
+                'data': data,
+                'active': 4,
             }
     return render(request, 'view_csv.html', context)
 
@@ -108,7 +116,8 @@ def analize_data(request):
             html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
             context = {
                 'form': form,
-                'data': html_analized_data.data
+                'data': html_analized_data.data,
+                'active': 3,
             }
             render(request, 'analisis_dataset.html', context)
     else:
@@ -125,7 +134,8 @@ def analize_data(request):
         html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
         context = {
                 'form': form,
-                'data': html_analized_data.data
+                'data': html_analized_data.data,
+                'active': 3,
             }
     return render(request, 'analisis_dataset.html', context)
 
@@ -204,9 +214,24 @@ def graphs(request):
         'et_bars': uri_3,
         'cs_box': uri_4,
         'rr_bars': uri_5,
+        'active': 2
     }
 
     return render(request, 'graficos.html', context)
 
 def redirect_start(request):
     return HttpResponseRedirect('/data_salaries/upload/')
+
+def Predicción(request):
+    context = {
+        'active': 1
+    }
+    return render(request, 'Predicción.html',context)
+
+def dueño(request):
+
+    return render(request, 'dueño.html',)
+
+def empleado(request):
+
+    return render(request, 'empleado.html',)

@@ -99,27 +99,33 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="http://127.0.0.1:8000/data_salaries/upload/">
+          <a class="nav-link d-flex align-items-center gap-2 {% if active == 5 %}active {%endif%}" aria-current="page" href="http://127.0.0.1:8000/data_salaries/upload/">
             <svg class="bi"><use xlink:href="#house-fill"/></svg>
             Home
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/view/">
+          <a class="nav-link d-flex align-items-center gap-2 {% if active == 4 %}active {%endif%}" href="http://127.0.0.1:8000/data_salaries/view/">
             <svg class="bi"><use xlink:href="#file-earmark"/></svg>
             Dataset
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/graphs/">
+          <a class="nav-link d-flex align-items-center gap-2 {% if active == 2 %}active {%endif%}" href="http://127.0.0.1:8000/data_salaries/graphs/">
             <svg class="bi"><use xlink:href="#cart"/></svg>
             Graficos relevantes
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center gap-2" href="http://127.0.0.1:8000/data_salaries/analisis/">
-            <svg class="bi"><use xlink:href="#cart"/></svg>
+          <a class="nav-link d-flex align-items-center gap-2 {% if active == 3 %}active {%endif%} " href="http://127.0.0.1:8000/data_salaries/analisis/">
+            <svg class="bi"><use xlink:href="#file-earmark"/></svg>
             Analisis del dataset 
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex align-items-center gap-2 {% if active == 1 %}active {%endif%} " href="http://127.0.0.1:8000/data_salaries/Predicción/">
+            <svg class="bi"><use xlink:href="#cart"/></svg>
+            Predicción 
           </a>
         </li>
       </ul>
