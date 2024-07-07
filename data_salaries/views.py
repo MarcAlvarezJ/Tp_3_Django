@@ -227,8 +227,63 @@ def prediction_select(request):
     return render(request, 'prediction_select.html')
 
 def prediction_employee(request):
-    pass
-    
+    try:
+        data = pd.read_csv('salaries.csv')
+    except FileNotFoundError:
+        return HttpResponse('Datos no cargados')
+    if request.method == "POST":
+        employee_form = employee_info(request.POST)
+        if employee_form.is_valid():
+            employee_filtered_data = data
+            if employee_form.cleaned_data['experience']:
+                employee_filtered_data = employee_filtered_data[employee_filtered_data['experience_level'] == employee_form.cleaned_data['experience']]
+            if employee_form.cleaned_data['remote']:
+                employee_filtered_data = employee_filtered_data[employee_filtered_data['remote_ratio'] == int(employee_form.cleaned_data['remote'])]
+            if employee_form.cleaned_data['residence']:
+                employee_filtered_data = employee_filtered_data[employee_filtered_data['employee_residence'] == employee_form.cleaned_data['residence']]
+            if employee_form.cleaned_data['type']:
+                employee_filtered_data = employee_filtered_data[employee_filtered_data['employment_type'] == employee_form.cleaned_data['type']]
+            if len(employee_filtered_data) == 0:
+                employee_form = employee_info
+                context= {
+                    'employee_form': employee_form,
+                    'error': f'Datos para el empleado no disponibles'
+                }                    
+                return render(request, 'employee_predict.html', context)
+            
+            median = employee_filtered_data['salary_in_usd'].median()
+            Q1 = employee_filtered_data['salary_in_usd'].quantile(0.25)
+            Q3 = employee_filtered_data['salary_in_usd'].quantile(0.75)
+            value_list = employee_filtered_data['salary_in_usd'].to_list()
+
+            plt.figure(figsize=(10, 6))
+            plt.hist(value_list, weights=np.ones(len(value_list))/len(value_list), bins=30, color='skyblue', edgecolor='black')
+            plt.title('Distribución de posibles salarios')
+            plt.xlabel('Salario en USD')
+            plt.ylabel('Frecuencia')
+            plt.ticklabel_format(style='plain')
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png')
+            buf.seek(0)
+            string = base64.b64encode(buf.read())
+            uri = urllib.parse.quote(string)
+
+            employee_form = employee_info
+            context= {
+                'employee_form': employee_form,
+                'median': median,
+                'range': f'{Q1}-{Q3}',
+                'uri': uri
+            }                    
+            return render(request, 'employee_predict.html', context)
+        
+    else:
+        employee_form = employee_info
+        context= {
+            'employee_form': employee_form
+            }                    
+        return render(request, 'employee_predict.html', context)
+        
 def prediction_business(request):
     try:
         data = pd.read_csv('salaries.csv')

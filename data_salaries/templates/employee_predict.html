@@ -1,0 +1,17 @@
+{% if employee_form %}
+<form method="post">
+    {% csrf_token %}
+    {{ employee_form }}
+    <input type="submit" value="Submit">
+</form>
+{% endif %}
+
+{% if error %}
+{{ error }}
+{% endif %}
+
+{% if uri %}
+median: {{ median }}
+rango: {{range}}
+<img src="data:image/png;base64,{{ uri }}">
+{% endif %}
