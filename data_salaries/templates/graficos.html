@@ -13,21 +13,30 @@
   </div>
 </div>
 
-<div class="container-fluid mt-2" style=": display: flex; margin: 20px auto; ">
-<div class="row justify-content-center " >
-    
-<img class="m-1 mt-5" style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ sal_hist }}" alt="Distribución de Salarios">
-
-<img class="m-1  mt-5" style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ el_scat }}" alt="Salario vs. Experiencia">
-
-<img class="m-1 mt-5 " style=": height: 230px; width: 500px;"  data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ et_bars }}" alt="Salarios por Tipo de Empleo">
-
-<img class="m-1 mt-5 " style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ cs_box }}" alt="Salarios por Tamaño de la Empresa">
-
-<img class="m-1 mt-5 " style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ rr_bars }}" alt="Ratio de Trabajo Remoto vs. Salario">
-
+<div class="container-fluid mt-2 d-flex flex-column align-items-center" style="margin: 20px auto;">
+  <div class="row justify-content-center">
+      <div class="col-md">
+          <img class="m-1 mt-5 img-fluid" style="border-radius: 5%;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ sal_hist }}" alt="Distribución de Salarios">
+      </div>
+      <div class="col-md ">
+          <img class="m-1 mt-5 img-fluid" style="border-radius: 5%;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ el_scat }}" alt="Salario vs. Experiencia">
+      </div>
+  </div>
+  <div class="row justify-content-center">
+      <div class="col-md" >
+          <img class="m-1 mt-5 img-fluid" style="border-radius: 5%;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ et_bars }}" alt="Salarios por Tipo de Empleo">
+      </div>
+      <div class="col-md">
+        <img class="m-1 mt-5 img-fluid" style="border-radius: 5%; " data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ rr_bars }}" alt="Ratio de Trabajo Remoto vs. Salario">
+      </div>
+  </div>
+  <div class="row justify-content-center ">
+      <div class="col-md "  >
+        <img class="m-1 mt-5 img-fluid " style="border-radius: 5%;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ cs_box }}" alt="Salarios por Tamaño de la Empresa">
+      </div>
+  </div>
 </div>
-</div>
+
 
 
 {% endblock %}
