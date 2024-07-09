@@ -1,11 +1,12 @@
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class upload_file(forms.Form):
     upload_file = forms.FileField(label='Base de datos')
 
-experience_level_opt = {'MI': 'MI','SE': 'SE','EN': 'EN','EX': 'EX'}
+experience_level_opt = {'MI': 'MI (Intermedio)','SE': 'SE (Senior)','EN': 'En (Entrada)','EX': 'EX (Ejecutivo)'}
 
-employment_type_opt = {'FT': 'FT','CT': 'CT','PT': 'PT','FL': 'FL'}
+employment_type_opt = {'FT': 'FT (Full Time)','CT': 'CT (Contrato)','PT': 'PT (Part Time)','FL': 'FL (Freelancer)'}
 
 employee_residence_opt = {
     'AU': 'AU', 'US': 'US', 'GB': 'GB', 'CA': 'CA', 'NL': 'NL', 'LT': 'LT', 'DK': 'DK', 'FR': 'FR',
@@ -36,7 +37,7 @@ company_location_opt = {
     'IQ': 'IQ', 'CN': 'CN', 'CL': 'CL', 'MD': 'MD'
     }
 
-company_size_opt = {'S': 'S','M': 'M','L': 'L'}
+company_size_opt = {'S': 'S (Pequeña)','M': 'M (Mediana)','L': 'L (Grande)'}
 
 class view_filter(forms.Form):
     experience_level = forms.MultipleChoiceField(
@@ -76,9 +77,9 @@ class view_filter(forms.Form):
         )
     
 vars_opt = [
-    ('experience_level', 'experience_level'), ('employment_type', 'employment_type'),
-    ('employee_residence', 'employee_residence'), ('remote_ratio', 'remote_ratio'),
-    ('company_location', 'company_location'), ('company_size', 'company_size')
+    ('experience_level', 'Nivel de Expreiencia'), ('employment_type', 'Tipo de Trabajo'),
+    ('employee_residence', 'Residencia Empledo'), ('remote_ratio', 'Pct. Remoto'),
+    ('company_location', 'Ubicacion Empresa'), ('company_size', 'Tamaño Empresa')
 ]
 
 class analize_filter(forms.Form):
@@ -86,4 +87,64 @@ class analize_filter(forms.Form):
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=vars_opt
+    )
+
+user_opt = [
+    ('empleado', 'Empleado'), ('empresa', 'Empresa')
+]
+
+none_company_location_opt = company_location_opt.copy()
+none_company_location_opt[None] = '-'
+
+none_company_size_opt = company_size_opt.copy()
+none_company_size_opt[None] = '-'
+
+none_experience_level_opt = experience_level_opt.copy()
+none_experience_level_opt[None] = '-'
+
+none_remote_ratio_opt = remote_ratio_opt.copy()
+none_remote_ratio_opt[None] = '-'
+
+none_employee_residence_opt = employee_residence_opt.copy()
+none_employee_residence_opt[None] = '-'
+
+none_employment_type_opt = employment_type_opt.copy()
+none_employment_type_opt[None] = '-'
+
+class business_info(forms.Form):
+    location = forms.ChoiceField(
+        required=False,
+        choices=none_company_location_opt
+    )
+
+    size = forms.ChoiceField(
+        required=False,
+        choices=none_company_size_opt
+    )
+
+class employee_info(forms.Form):
+    experience = forms.ChoiceField(
+        required=False,
+        choices=none_experience_level_opt
+    )
+
+    remote = forms.ChoiceField(
+        required=False,
+        choices=none_remote_ratio_opt
+    )
+
+    residence = forms.ChoiceField(
+        required=False,
+        choices=none_employee_residence_opt
+    )
+
+    type = forms.ChoiceField(
+        required=False,
+        choices=none_employment_type_opt
+    )
+
+class employee_amnt(forms.Form):
+    amount = forms.IntegerField(
+        required=True,
+        validators=[MaxValueValidator(5), MinValueValidator(1)]
     )
