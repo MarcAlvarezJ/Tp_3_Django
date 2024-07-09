@@ -2,31 +2,32 @@
 
 
 {% block content %}
+
 <div class="container">
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2 text-white" style="margin-top: 7px">Graficos</h1>
-        <div class="btn-toolbar mb-2 mb-md-0">
-          <div class="btn-group me-2">
-          </div>
-        </div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2 text-white" style="margin-top: 7px">Graficos</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <div class="btn-group me-2">
       </div>
     </div>
+  </div>
+</div>
 
-<div class="container-fluid mt-2" style=": display: flex; margin: 20px auto; width: 80%;">
-    <div class="row justify-content-center">
-        
-<img class="m-1"data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ sal_hist }}" alt="Distribución de Salarios">
+<div class="container-fluid mt-2" style=": display: flex; margin: 20px auto; ">
+<div class="row justify-content-center " >
+    
+<img class="m-1 mt-5" style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ sal_hist }}" alt="Distribución de Salarios">
 
+<img class="m-1  mt-5" style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ el_scat }}" alt="Salario vs. Experiencia">
 
-<img class="m-1" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ el_scat }}" alt="Salario vs. Experiencia">
+<img class="m-1 mt-5 " style=": height: 230px; width: 500px;"  data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ et_bars }}" alt="Salarios por Tipo de Empleo">
 
+<img class="m-1 mt-5 " style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ cs_box }}" alt="Salarios por Tamaño de la Empresa">
 
-<img class="m-1"  data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ et_bars }}" alt="Salarios por Tipo de Empleo">
-
-<img class="m-1" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ cs_box }}" alt="Salarios por Tamaño de la Empresa">
-
-<img class="m-1" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ rr_bars }}" alt="Ratio de Trabajo Remoto vs. Salario">
+<img class="m-1 mt-5 " style=": height: 230px; width: 500px;" data-aos="fade-up" data-aos-duration="3000" src="data:image/png;base64,{{ rr_bars }}" alt="Ratio de Trabajo Remoto vs. Salario">
 
 </div>
 </div>
+
+
 {% endblock %}
