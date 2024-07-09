@@ -118,7 +118,7 @@ def analize_data(request):
                 columns.append(var)
 
             analized_df = pd.DataFrame(analized_matrix, columns=columns)
-            html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
+            html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm table-bordered'))
             context = {
                 'form': form,
                 'data': html_analized_data.data,
@@ -135,9 +135,9 @@ def analize_data(request):
         n_Q1 = filtered_data['salary_in_usd'].quantile(0.25)
         n_Q3 = filtered_data['salary_in_usd'].quantile(0.75)
         n_count = len(filtered_data)
-        analized_matrix = [n_mean, n_med, n_max, n_min, n_Q1, n_Q3, n_count]
+        analized_matrix = [round(n_mean, 2), n_med, n_max, n_min, n_Q1, n_Q3, n_count]
         analized_df = pd.DataFrame([analized_matrix], columns=('Promedio', 'Mediana', 'Maximo', 'Minimo', 'Q1', 'Q3', 'Cantidad'))
-        html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
+        html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm table-bordered'))
         context = {
                 'form': form,
                 'data': html_analized_data.data,
