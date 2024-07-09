@@ -20,7 +20,7 @@ def upload(request):
             return HttpResponseRedirect('/data_salaries/view/')
     else:
         form = upload_file
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'upload.html', {'form': form,'active':0} )
 
 def handle_file(file):
     with open("salaries.csv", "wb+") as destination:
@@ -51,7 +51,8 @@ def view_csv(request):
                     filtered_data = filtered_data.head(3000).to_dict(orient='records')
             context = {
                 'form': form,
-                'data': filtered_data
+                'data': filtered_data,
+                'active': 1
             }
             render(request, 'view_csv.html', context)
     else:
@@ -59,7 +60,8 @@ def view_csv(request):
         data = data.head(3000).to_dict(orient='records')
         context = {
                 'form': form,
-                'data': data
+                'data': data,
+                'active': 1
             }
     return render(request, 'view_csv.html', context)
 
@@ -119,7 +121,8 @@ def analize_data(request):
             html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
             context = {
                 'form': form,
-                'data': html_analized_data.data
+                'data': html_analized_data.data,
+                'active': 2
             }
             render(request, 'analisis_dataset.html', context)
     else:
@@ -137,7 +140,8 @@ def analize_data(request):
         html_analized_data = HTML(analized_df.to_html(classes='table table-stripped table-sm'))
         context = {
                 'form': form,
-                'data': html_analized_data.data
+                'data': html_analized_data.data,
+                'active': 2
             }
     return render(request, 'analisis_dataset.html', context)
 
@@ -216,6 +220,7 @@ def graphs(request):
         'et_bars': uri_3,
         'cs_box': uri_4,
         'rr_bars': uri_5,
+        'active': 3
     }
 
     return render(request, 'graficos.html', context)
@@ -224,7 +229,10 @@ def redirect_start(request):
     return HttpResponseRedirect('/data_salaries/upload/')
 
 def prediction_select(request):
-    return render(request, 'prediction_select.html')
+    context={
+        'active': 4,
+    }
+    return render(request, 'prediction_select.html',context)
 
 def prediction_employee(request):
     try:

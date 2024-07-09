@@ -1,0 +1,28 @@
+{% extends "master.html" %}
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <div class="row">
+      <div class="col-md-6 d-flex justify-content-center">
+          <div class="card m-3 p-1" style="width: 18rem;"data-aos="fade-up" data-aos-duration="1500">
+              <img src="https://images.pexels.com/photos/1367269/pexels-photo-1367269.jpeg?auto=compress&cs=tinysrgb&w=600" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Encontra empleos</h5>
+                  <p class="card-text">¿Querés ver un estimado de cuanto podrias ganar segun tus caracteristicas como empleado?</p>
+                  <a href="http://127.0.0.1:8000/data_salaries/prediction/employee/" class="btn btn-dark w-100 btn-lg mt-auto">Explora ahora</a>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-md-6 d-flex justify-content-center" >
+          <div class="card m-3 p-1" style="width: 18rem;"data-aos="fade-up" data-aos-duration="1500"data-aos-delay='500'>
+              <img src="https://images.pexels.com/photos/290275/pexels-photo-290275.jpeg?auto=compress&cs=tinysrgb&w=600" class="card-img-top" style="height: 200px; object-fit: cover;" alt="...">
+              <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Encontra empleados</h5>
+                  <p class="card-text">Descubri un estimado de cuanto te saldra cada empleado</p>
+                  <a href="http://127.0.0.1:8000/data_salaries/prediction/business/" class="btn btn-dark w-100 btn-lg mt-auto">Explora ahora</a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}

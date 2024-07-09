@@ -4,40 +4,72 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class upload_file(forms.Form):
     upload_file = forms.FileField(label='Base de datos')
 
-experience_level_opt = {'MI': 'MI (Intermedio)','SE': 'SE (Senior)','EN': 'En (Entrada)','EX': 'EX (Ejecutivo)'}
+experience_level_opt = [
+    ('MI', 'MI (Intermedio)'),
+    ('SE', 'SE (Senior)'),
+    ('EN', 'En (Entrada)'),
+    ('EX', 'EX (Ejecutivo)')
+]
 
-employment_type_opt = {'FT': 'FT (Full Time)','CT': 'CT (Contrato)','PT': 'PT (Part Time)','FL': 'FL (Freelancer)'}
+employment_type_opt = [
+    ('FT', 'FT (Full Time)'),
+    ('CT', 'CT (Contrato)'),
+    ('PT', 'PT (Part Time)'),
+    ('FL', 'FL (Freelancer)')
+]
 
-employee_residence_opt = {
-    'AU': 'AU', 'US': 'US', 'GB': 'GB', 'CA': 'CA', 'NL': 'NL', 'LT': 'LT', 'DK': 'DK', 'FR': 'FR',
-    'ZA': 'ZA', 'NZ': 'NZ', 'AR': 'AR', 'ES': 'ES', 'KE': 'KE', 'LV': 'LV', 'GE': 'GE', 'IN': 'IN',
-    'DE': 'DE', 'IL': 'IL', 'FI': 'FI', 'AT': 'AT', 'HR': 'HR', 'BR': 'BR', 'CH': 'CH', 'AE': 'AE',
-    'GR': 'GR', 'PL': 'PL', 'SA': 'SA', 'UA': 'UA', 'EG': 'EG', 'PH': 'PH', 'TR': 'TR', 'OM': 'OM',
-    'MX': 'MX', 'PT': 'PT', 'BA': 'BA', 'IT': 'IT', 'IE': 'IE', 'EE': 'EE', 'MT': 'MT', 'LB': 'LB',
-    'RO': 'RO', 'HU': 'HU', 'VN': 'VN', 'NG': 'NG', 'CZ': 'CZ', 'PK': 'PK', 'UG': 'UG', 'CO': 'CO',
-    'SI': 'SI', 'MU': 'MU', 'AM': 'AM', 'TH': 'TH', 'KR': 'KR', 'QA': 'QA', 'RU': 'RU', 'TN': 'TN',
-    'GH': 'GH', 'BE': 'BE', 'AD': 'AD', 'EC': 'EC', 'PE': 'PE', 'MD': 'MD', 'NO': 'NO', 'UZ': 'UZ',
-    'JP': 'JP', 'HK': 'HK', 'CF': 'CF', 'SG': 'SG', 'SE': 'SE', 'KW': 'KW', 'CY': 'CY', 'IR': 'IR',
-    'AS': 'AS', 'CN': 'CN', 'CR': 'CR', 'CL': 'CL', 'PR': 'PR', 'BO': 'BO', 'DO': 'DO', 'ID': 'ID',
-    'MY': 'MY', 'HN': 'HN', 'DZ': 'DZ', 'IQ': 'IQ', 'BG': 'BG', 'JE': 'JE', 'RS': 'RS', 'LU': 'LU'
-}
+employee_residence_opt = [
+    ('AU', 'AU'), ('US', 'US'), ('GB', 'GB'), ('CA', 'CA'), ('NL', 'NL'),
+    ('LT', 'LT'), ('DK', 'DK'), ('FR', 'FR'), ('ZA', 'ZA'), ('NZ', 'NZ'),
+    ('AR', 'AR'), ('ES', 'ES'), ('KE', 'KE'), ('LV', 'LV'), ('GE', 'GE'),
+    ('IN', 'IN'), ('DE', 'DE'), ('IL', 'IL'), ('FI', 'FI'), ('AT', 'AT'),
+    ('HR', 'HR'), ('BR', 'BR'), ('CH', 'CH'), ('AE', 'AE'), ('GR', 'GR'),
+    ('PL', 'PL'), ('SA', 'SA'), ('UA', 'UA'), ('EG', 'EG'), ('PH', 'PH'),
+    ('TR', 'TR'), ('OM', 'OM'), ('MX', 'MX'), ('PT', 'PT'), ('BA', 'BA'),
+    ('IT', 'IT'), ('IE', 'IE'), ('EE', 'EE'), ('MT', 'MT'), ('LB', 'LB'),
+    ('RO', 'RO'), ('HU', 'HU'), ('VN', 'VN'), ('NG', 'NG'), ('CZ', 'CZ'),
+    ('PK', 'PK'), ('UG', 'UG'), ('CO', 'CO'), ('SI', 'SI'), ('MU', 'MU'),
+    ('AM', 'AM'), ('TH', 'TH'), ('KR', 'KR'), ('QA', 'QA'), ('RU', 'RU'),
+    ('TN', 'TN'), ('GH', 'GH'), ('BE', 'BE'), ('AD', 'AD'), ('EC', 'EC'),
+    ('PE', 'PE'), ('MD', 'MD'), ('NO', 'NO'), ('UZ', 'UZ'), ('JP', 'JP'),
+    ('HK', 'HK'), ('CF', 'CF'), ('SG', 'SG'), ('SE', 'SE'), ('KW', 'KW'),
+    ('CY', 'CY'), ('IR', 'IR'), ('AS', 'AS'), ('CN', 'CN'), ('CR', 'CR'),
+    ('CL', 'CL'), ('PR', 'PR'), ('BO', 'BO'), ('DO', 'DO'), ('ID', 'ID'),
+    ('MY', 'MY'), ('HN', 'HN'), ('DZ', 'DZ'), ('IQ', 'IQ'), ('BG', 'BG'),
+    ('JE', 'JE'), ('RS', 'RS'), ('LU', 'LU')
+]
 
-remote_ratio_opt = {'0': '0','50': '50','100': '100'}
+remote_ratio_opt = [
+    ('0', '0'),
+    ('50', '50'),
+    ('100', '100')
+]
 
-company_location_opt = {
-    'AU': 'AU', 'US': 'US', 'GB': 'GB', 'CA': 'CA', 'NL': 'NL', 'LT': 'LT', 'DK': 'DK', 'FR': 'FR',
-    'ZA': 'ZA', 'NZ': 'NZ', 'AR': 'AR', 'ES': 'ES', 'KE': 'KE', 'LVIN': 'LVIN', 'DE': 'DE', 'IL': 'IL',
-    'FI': 'FI', 'AT': 'AT', 'BR': 'BR', 'CH': 'CH', 'AE': 'AE', 'PL': 'PL', 'SA': 'SA', 'UA': 'UA',
-    'EG': 'EG', 'PH': 'PH', 'TR': 'TR', 'OM': 'OM', 'MX': 'MX', 'PT': 'PT', 'BA': 'BA', 'IT': 'IT',
-    'AS': 'AS', 'IE': 'IE', 'EE': 'EE', 'MT': 'MT', 'HU': 'HU', 'LB': 'LB', 'RO': 'RO', 'VN': 'VN',
-    'NG': 'NG', 'LU': 'LU', 'GI': 'GI', 'CO': 'CO', 'SI': 'SI', 'GR': 'GR', 'MU': 'MU', 'RU': 'RU',
-    'KR': 'KR', 'CZ': 'CZ', 'QA': 'QA', 'GH': 'GH', 'SE': 'SE', 'AD': 'AD', 'EC': 'EC', 'NO': 'NO',
-    'JP': 'JP', 'HK': 'HK', 'CF': 'CF', 'SG': 'SG', 'TH': 'TH', 'HR': 'HR', 'AM': 'AM', 'PK': 'PK',
-    'IR': 'IR', 'BS': 'BS', 'PR': 'PR', 'BE': 'BE', 'ID': 'ID', 'MY': 'MY', 'HN': 'HN', 'DZ': 'DZ',
-    'IQ': 'IQ', 'CN': 'CN', 'CL': 'CL', 'MD': 'MD'
-    }
+company_location_opt = [
+    ('AU', 'AU'), ('US', 'US'), ('GB', 'GB'), ('CA', 'CA'), ('NL', 'NL'),
+    ('LT', 'LT'), ('DK', 'DK'), ('FR', 'FR'), ('ZA', 'ZA'), ('NZ', 'NZ'),
+    ('AR', 'AR'), ('ES', 'ES'), ('KE', 'KE'), ('LVIN', 'LVIN'), ('DE', 'DE'),
+    ('IL', 'IL'), ('FI', 'FI'), ('AT', 'AT'), ('BR', 'BR'), ('CH', 'CH'),
+    ('AE', 'AE'), ('PL', 'PL'), ('SA', 'SA'), ('UA', 'UA'), ('EG', 'EG'),
+    ('PH', 'PH'), ('TR', 'TR'), ('OM', 'OM'), ('MX', 'MX'), ('PT', 'PT'),
+    ('BA', 'BA'), ('IT', 'IT'), ('AS', 'AS'), ('IE', 'IE'), ('EE', 'EE'),
+    ('MT', 'MT'), ('HU', 'HU'), ('LB', 'LB'), ('RO', 'RO'), ('VN', 'VN'),
+    ('NG', 'NG'), ('LU', 'LU'), ('GI', 'GI'), ('CO', 'CO'), ('SI', 'SI'),
+    ('GR', 'GR'), ('MU', 'MU'), ('RU', 'RU'), ('KR', 'KR'), ('CZ', 'CZ'),
+    ('QA', 'QA'), ('GH', 'GH'), ('SE', 'SE'), ('AD', 'AD'), ('EC', 'EC'),
+    ('NO', 'NO'), ('JP', 'JP'), ('HK', 'HK'), ('CF', 'CF'), ('SG', 'SG'),
+    ('TH', 'TH'), ('HR', 'HR'), ('AM', 'AM'), ('PK', 'PK'), ('IR', 'IR'),
+    ('BS', 'BS'), ('PR', 'PR'), ('BE', 'BE'), ('ID', 'ID'), ('MY', 'MY'),
+    ('HN', 'HN'), ('DZ', 'DZ'), ('IQ', 'IQ'), ('CN', 'CN'), ('CL', 'CL'),
+    ('MD', 'MD')
+]
 
-company_size_opt = {'S': 'S (Pequeña)','M': 'M (Mediana)','L': 'L (Grande)'}
+
+company_size_opt = [
+    ('S', 'S (Pequeña)'),
+    ('M', 'M (Mediana)'),
+    ('L', 'L (Grande)')
+]
 
 class view_filter(forms.Form):
     experience_level = forms.MultipleChoiceField(
@@ -93,23 +125,28 @@ user_opt = [
     ('empleado', 'Empleado'), ('empresa', 'Empresa')
 ]
 
+
+
 none_company_location_opt = company_location_opt.copy()
-none_company_location_opt[None] = '-'
+none_company_location_opt.append((None,'-'))
 
 none_company_size_opt = company_size_opt.copy()
-none_company_size_opt[None] = '-'
+none_company_size_opt.append((None,'-'))
 
 none_experience_level_opt = experience_level_opt.copy()
-none_experience_level_opt[None] = '-'
+none_experience_level_opt.append((None,'-'))
 
 none_remote_ratio_opt = remote_ratio_opt.copy()
-none_remote_ratio_opt[None] = '-'
+none_remote_ratio_opt.append((None,'-'))
 
 none_employee_residence_opt = employee_residence_opt.copy()
-none_employee_residence_opt[None] = '-'
+none_employee_residence_opt.append((None,'-'))
 
 none_employment_type_opt = employment_type_opt.copy()
-none_employment_type_opt[None] = '-'
+none_employment_type_opt.append((None,'-'))
+
+
+
 
 class business_info(forms.Form):
     location = forms.ChoiceField(
