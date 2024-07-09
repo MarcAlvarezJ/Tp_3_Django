@@ -280,7 +280,7 @@ def prediction_employee(request):
             context= {
                 'employee_form': employee_form,
                 'median': median,
-                'range': f'{Q1}-{Q3}',
+                'range': f'{Q1} - {Q3}',
                 'uri': uri
             }                    
             return render(request, 'employee_predict.html', context)
@@ -398,7 +398,7 @@ def prediction_business(request):
                     'employee_form': employee_forms,
                     'amount_form': amount_form,
                     'median': median,
-                    'range': f'{Q1}-{Q3}',
+                    'range': f'{Q1} - {Q3}',
                     'uri': uri
                 }                    
                 return render(request, 'business_predict.html', context)

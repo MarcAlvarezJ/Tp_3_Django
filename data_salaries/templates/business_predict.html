@@ -6,7 +6,7 @@
     <div class="card p-4 mb-4"data-aos="fade-up" data-aos-duration="3000">
         <form method="post">
             {% csrf_token %}
-            <h2 class="mb-4 text-dark">Amount of employees</h2>
+            <h2 class="mb-4 text-dark">Cantidad de empleados</h2>
             <div class="mb-3">
                 {{ amount_form.as_p }}
             </div>
@@ -26,12 +26,12 @@
     <div class="card p-4"data-aos="fade-up" data-aos-delay="1000"data-aos-duration="1500">
         <form method="post">
             {% csrf_token %}
-            <h2 class="mb-4 text-dark">Business Info</h2>
+            <h2 class="mb-4 text-dark">Informacion de la empresa</h2>
             <div class="mb-3">
                 {{ business_form.as_p }}
             </div>
             {% for form in employee_form %}
-                <h3 class="h5 mt-4 text-dark">Employee {{ forloop.counter }}</h3>
+                <h3 class="h5 mt-4 text-dark">Empleado {{ forloop.counter }}</h3>
                 <div class="mb-3">
                     {{ form.as_p }}
                 </div>
@@ -46,8 +46,8 @@
 <div class="container mt-4 text-white"data-aos-duration="1500"data-aos="fade-up">
     <div class="card p-4">
         <h3 class="text-dark">Results</h3>
-        <p>Median: {{ median }}</p>
-        <p>Range: {{ range }}</p>
+        <p>Mediana: {{ median }} USD</p>
+        <p>Rango intercuartil: {{ range }} USD</p>
         <img class="img-fluid mt-3" src="data:image/png;base64,{{ uri }}">
     </div>
 </div>

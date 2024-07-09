@@ -109,13 +109,14 @@ class view_filter(forms.Form):
         )
     
 vars_opt = [
-    ('experience_level', 'Nivel de Expreiencia'), ('employment_type', 'Tipo de Trabajo'),
-    ('employee_residence', 'Residencia Empledo'), ('remote_ratio', 'Pct. Remoto'),
-    ('company_location', 'Ubicacion Empresa'), ('company_size', 'Tamaño Empresa')
+    ('experience_level', 'Nivel de expreiencia'), ('employment_type', 'Tipo de trabajo'),
+    ('employee_residence', 'Residencia del empledo'), ('remote_ratio', 'Pct. remoto'),
+    ('company_location', 'Ubicacion de la empresa'), ('company_size', 'Tamaño de la empresa')
 ]
 
 class analize_filter(forms.Form):
     filter_vars = forms.MultipleChoiceField(
+        label='Comparar por variables',
         required=False,
         widget=forms.CheckboxSelectMultiple,
         choices=vars_opt
@@ -150,38 +151,45 @@ none_employment_type_opt.append((None,'-'))
 
 class business_info(forms.Form):
     location = forms.ChoiceField(
+        label='Ubicacion',
         required=False,
         choices=none_company_location_opt
     )
 
     size = forms.ChoiceField(
+        label='Tamaño',
         required=False,
         choices=none_company_size_opt
     )
 
 class employee_info(forms.Form):
     experience = forms.ChoiceField(
+        label='Nivel de Expreiencia',
         required=False,
         choices=none_experience_level_opt
     )
 
     remote = forms.ChoiceField(
+        label='Pct. Remoto',
         required=False,
         choices=none_remote_ratio_opt
     )
 
     residence = forms.ChoiceField(
+        label='Residencia',
         required=False,
         choices=none_employee_residence_opt
     )
 
     type = forms.ChoiceField(
+        label='Tipo de Trabajo',
         required=False,
         choices=none_employment_type_opt
     )
 
 class employee_amnt(forms.Form):
     amount = forms.IntegerField(
+        label='Cantidad de empleados',
         required=True,
         validators=[MaxValueValidator(5), MinValueValidator(1)]
     )

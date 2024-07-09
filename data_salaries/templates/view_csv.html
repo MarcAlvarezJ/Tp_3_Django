@@ -4,7 +4,7 @@
 {% block content %}
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 container">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2 text-white" style="margin-top: 7px ">Data set</h1>
+        <h1 class="h2 text-white" style="margin-top: 7px ">Dataset</h1>
       </div>
 
       <head>
@@ -12,25 +12,25 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <b class='text-white'>Search the entire table:
+        <b class='text-white'>Buscar en toda la tabla:
             <input id="entireSearch" type="text" placeholder="Search here">
         </b>
     
         <br>
     
-        <b class='text-white'>Search specific column (Work Year, Experience Level, etc.):
+        <b class='text-white'>Buscar en columna especifica (Año de trabajo, Nivel de experiencia, etc.):
             <select id="columnSelect">
-                <option value="all">All Columns</option>
-                <option value="work_year">Work Year</option>
-                <option value="experience_level">Experience Level</option>
-                <option value="employment_type">Employment Type</option>
-                <option value="job_title">Job Title</option>
-                <option value="salary">Salary</option>
-                <option value="salary_currency">Salary Currency</option>
-                <option value="employee_residence">Employee Residence</option>
-                <option value="remote_ratio">Remote Ratio</option>
-                <option value="company_location">Company Location</option>
-                <option value="company_size">Company Size</option>
+                <option value="all">Todas las columnas</option>
+                <option value="work_year">Año de trabajo</option>
+                <option value="experience_level">Nivel de experiencia</option>
+                <option value="employment_type">Tipo de trabajo</option>
+                <option value="job_title">Titulo del trabajo</option>
+                <option value="salary">Salario</option>
+                <option value="salary_currency">Moneda del salario</option>
+                <option value="employee_residence">Residencia del empleado</option>
+                <option value="remote_ratio">Pct. remoto</option>
+                <option value="company_location">Ubicacion de la empresa</option>
+                <option value="company_size">Tamaño de la empresa</option>
             </select>
             <input id="columnSearch" type="text" placeholder="Search column">
         </b>
@@ -40,16 +40,16 @@
         <table class='table table-striped' id="geeks" border="1" style='width:auto'>
             <thead>
                 <tr>
-                    <th>Work Year</th>
-                    <th>Experience Level</th>
-                    <th>Employment Type</th>
-                    <th>Job Title</th>
-                    <th>Salary</th>
-                    <th>Salary Currency</th>
-                    <th>Employee Residence</th>
-                    <th>Remote Ratio</th>
-                    <th>Company Location</th>
-                    <th>Company Size</th>
+                    <th>Año de trabajo</th>
+                    <th>Nivel de experiencia</th>
+                    <th>Tipo de trabajo</th>
+                    <th>Titulo del trabajo</th>
+                    <th>Salario</th>
+                    <th>Moneda del salario</th>
+                    <th>Residencia del empleado</th>
+                    <th>Pct. remoto</th>
+                    <th>Ubicacion de la empresa</th>
+                    <th>Tamaño de la empresa</th>
                 </tr>
             </thead>
             <tbody>
